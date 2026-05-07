@@ -31,3 +31,4 @@ jobs:
         run: |
           docker push ${{ env.NEXT_APP_WEBSITE_IMAGE }}
           docker push ${{ env.NEXT_APP_NGINX_IMAGE }}
+          
