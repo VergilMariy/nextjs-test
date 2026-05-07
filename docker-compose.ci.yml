@@ -1,0 +1,27 @@
+services:
+  website:
+    container_name: website
+    build:
+      context: ./nextjs-test
+      dockerfile: Dockerfile
+      cache_from:
+        - 'ghcr.io/vergilmariy/website'
+    image: 'ghcr.io/vergilmariy/website'
+    env_file:
+      - ./.env
+    ports:
+      - '3000:3000'
+
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+      cache_from:
+        - 'ghcr.io/vergilmariy/nginx'
+    image: 'ghcr.io/vergilmariy/nginx'
+    ports:
+      - '80:80'
+    restart: always
+    depends_on:
+      - website

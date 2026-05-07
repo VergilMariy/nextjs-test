@@ -1,0 +1,16 @@
+services:
+  website:
+    container_name: website
+    image: 'ghcr.io/vergilmariy/website'
+    env_file: .env
+    ports:
+      - '3000:3000'
+
+  nginx:
+    container_name: nginx
+    image: 'ghcr.io/vergilmariy/nginx'
+    ports:
+      - '80:80'
+    depends_on:
+      - website
+    restart: always
