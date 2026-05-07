@@ -4,8 +4,8 @@ on:
   push:
     branches: [main]
 env:
-  NEXT_APP_WEBSITE_IMAGE: ghcr.io/$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')/website
-  NEXT_APP_NGINX_IMAGE: ghcr.io/$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')/nginx
+  NEXT_APP_WEBSITE_IMAGE: ghcr.io/vergilmariy/website
+  NEXT_APP_NGINX_IMAGE: ghcr.io/vergilmariy/nginx
   REGISTRY: ghcr.io
 jobs:
   build:

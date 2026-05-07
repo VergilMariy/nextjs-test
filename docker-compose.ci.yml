@@ -2,7 +2,7 @@ services:
   website:
     container_name: website
     build:
-      context: ./nextjs-test
+      context: .
       dockerfile: Dockerfile
       cache_from:
         - 'ghcr.io/vergilmariy/website'
