@@ -49,8 +49,8 @@ jobs:
         run: |
           
           docker login ghcr.io -u vergilmariy -p ${{secrets.PERSONAL_ACCESS_TOKEN}}
-          docker pull $WEBSITE_IMAGE
-          docker pull $NGINX_IMAGE 
+          docker pull ${{ env.NEXT_APP_WEBSITE_IMAGE }}
+          docker pull ${{ env.NEXT_APP_NGINX_IMAGE }} 
           docker compose --env-file=.env -f docker-compose.prod.yml up -d
           docker logout
 
