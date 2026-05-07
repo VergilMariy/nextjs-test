@@ -2,11 +2,11 @@ name: Simple CI
 
 on:
   push:
-    branches: [main]
+    branches: [develop]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: echo "Hello, GitHub Actions!"
+      - run: echo "Hello, GitHub Actions for Development!"
