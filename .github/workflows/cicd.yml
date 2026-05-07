@@ -6,7 +6,8 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ol-tr1
     steps:
       - uses: actions/checkout@v3
       - run: echo "Hello, GitHub Actions!"
+      - run: touch /home/admloc/hi.txt
