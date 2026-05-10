@@ -55,6 +55,8 @@ jobs:
           ssh-add - <<< "${{ secrets.SSH_KEY }}"
       
       - name: Deploy images on AWS EC2
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
           scp -o StrictHostKeyChecking=no -r ./.env ./docker-compose.prod.yml ${{secrets.AWS_USER}}@${{ secrets.AWS_ADDRESS }}:
           ssh -o StrictHostKeyChecking=no ${{secrets.AWS_USER}}@${{ secrets.AWS_ADDRESS }} << EOF
