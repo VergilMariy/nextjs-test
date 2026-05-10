@@ -25,6 +25,6 @@ services:
       - '443:443'
     volumes: 
       - /home/ubuntu/project/cert:/etc/nginx/ssl
-    restart: always
+#    restart: always
     depends_on:
       - website
