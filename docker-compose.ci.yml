@@ -2,7 +2,7 @@ services:
   website:
     container_name: website
     build:
-      context: .
+      context: ./nextjs-test
       dockerfile: Dockerfile
       cache_from:
         - 'ghcr.io/vergilmariy/website'
@@ -22,6 +22,9 @@ services:
     image: 'ghcr.io/vergilmariy/nginx'
     ports:
       - '80:80'
-    restart: always
+      - '443:443'
+    volumes: 
+      - /home/ubuntu/project/cert:/etc/nginx/ssl
+#    restart: always
     depends_on:
       - website
