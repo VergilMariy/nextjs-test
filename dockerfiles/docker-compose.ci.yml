@@ -24,7 +24,7 @@ services:
       - '80:80'
       - '443:443'
     volumes: 
-      - /home/ubuntu/project/cert:/etc/nginx/ssl
+      - /home/ubuntu/project/cert:/mnt/nginx/ssl
 #    restart: always
     depends_on:
       - website
