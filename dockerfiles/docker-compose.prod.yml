@@ -16,4 +16,4 @@ services:
       - /home/ubuntu/project/cert:/etc/nginx/ssl
     depends_on:
       - website
-    restart: always
+#    restart: always
