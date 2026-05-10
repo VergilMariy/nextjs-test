@@ -11,6 +11,9 @@ services:
     image: 'ghcr.io/vergilmariy/nginx'
     ports:
       - '80:80'
+      - '443:443'
+    volumes:
+      - /home/ubuntu/project/certs:/etc/nginx/ssl
     depends_on:
       - website
     restart: always
