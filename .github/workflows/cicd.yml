@@ -38,13 +38,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout main
-        uses: actions/checkout@v3
-      - name: Add environment variables to .env
-        run: |
-          echo NEXT_APP_WEBSITE_IMAGE=${{ env.NEXT_APP_WEBSITE_IMAGE }} >> .env
-          echo NEXT_APP_NGINX_IMAGE=${{ env.NEXT_APP_NGINX_IMAGE }} >> .env
-          echo NAMESPACE=${{ secrets.NAMESPACE }} >> .env
-          echo PERSONAL_ACCESS_TOKEN=${{ secrets.PERSONAL_ACCESS_TOKEN }} >> .env  
+        uses: actions/checkout@v3 
       - name: Add the private SSH key to the ssh-agent
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
@@ -58,13 +52,13 @@ jobs:
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
-          scp -o StrictHostKeyChecking=no -r ./.env ./docker-compose.prod.yml ${{secrets.AWS_USER}}@${{ secrets.AWS_ADDRESS }}:~
+          scp -o StrictHostKeyChecking=no -r ./docker-compose.prod.yml ${{secrets.AWS_USER}}@${{ secrets.AWS_ADDRESS }}:~
           ssh -o StrictHostKeyChecking=no ${{secrets.AWS_USER}}@${{ secrets.AWS_ADDRESS }} << EOF
             docker compose -f docker-compose.prod.yml down --rmi all -v
             echo ${{ secrets.PERSONAL_ACCESS_TOKEN }}| docker login ghcr.io -u ${{ secrets.NAMESPACE }} --password-stdin
             docker pull ${{ env.NEXT_APP_WEBSITE_IMAGE }}
             docker pull ${{ env.NEXT_APP_NGINX_IMAGE }} 
-            docker compose --env-file=.env -f docker-compose.prod.yml up -d
+            docker compose -f docker-compose.prod.yml up -d
             docker logout
           EOF
 
