@@ -34,7 +34,7 @@ jobs:
       - name: Prune versions
         uses: actions/delete-package-versions@v5
         with:
-          package-name: ${{ env.NEXT_APP_WEBSITE_IMAGE }}
+          package-name: website
           package-type: 'container'
           min-versions-to-keep: 5
           delete-only-untagged-versions: 'true'
