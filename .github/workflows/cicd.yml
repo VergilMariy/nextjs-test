@@ -11,6 +11,8 @@ jobs:
   build:
     name: Build Docker Images
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     steps:
       - name: Checkout main
         uses: actions/checkout@v6
@@ -34,7 +36,7 @@ jobs:
       - name: Prune versions
         uses: actions/delete-package-versions@v5
         with:
-          package-name: website
+          package-name: ${{ env.NEXT_APP_WEBSITE_IMAGE }}
           package-type: 'container'
           min-versions-to-keep: 5
           delete-only-untagged-versions: 'true'
