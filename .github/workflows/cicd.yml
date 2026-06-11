@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout main
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: Set environment variables
         run: |
@@ -31,6 +31,14 @@ jobs:
         run: |
           docker push ${{ env.NEXT_APP_WEBSITE_IMAGE }}
           docker push ${{ env.NEXT_APP_NGINX_IMAGE }}
+      - name: Prune versions
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name: ${{ env.NEXT_APP_WEBSITE_IMAGE }}
+          package-type: 'container'
+          min-versions-to-keep: 5
+          delete-only-untagged-versions: 'true'
+            
   deploy:
     name: Deploy AWS
     runs-on: ubuntu-latest
@@ -38,7 +46,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout main
-        uses: actions/checkout@v3 
+        uses: actions/checkout@v6 
       - name: Add the private SSH key to the ssh-agent
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
