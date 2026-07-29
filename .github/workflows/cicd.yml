@@ -4,8 +4,8 @@ on:
   push:
     branches: [main]
 env:
-  NEXT_APP_WEBSITE_IMAGE: ghcr.io/vergilmariy/website
-  NEXT_APP_NGINX_IMAGE: ghcr.io/vergilmariy/nginx
+  NEXT_APP_WEBSITE_IMAGE: ghcr.io/vergilmariy/website:main
+  NEXT_APP_NGINX_IMAGE: ghcr.io/vergilmariy/nginx:main
   REGISTRY: ghcr.io
 jobs:
   build:
