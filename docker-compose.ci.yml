@@ -7,8 +7,7 @@ services:
       cache_from:
         - 'ghcr.io/vergilmariy/website:main'
     image: 'ghcr.io/vergilmariy/website:main'
-    env_file:
-      - ./.env
+    env_file: .env
     ports:
       - '3000:3000'
 
