@@ -5,10 +5,8 @@ services:
       context: .
       dockerfile: Dockerfile
       cache_from:
-        - 'ghcr.io/vergilmariy/website'
-    image: 'ghcr.io/vergilmariy/website'
-    env_file:
-      - ./.env
+        - 'ghcr.io/vergilmariy/website:main'
+    image: 'ghcr.io/vergilmariy/website:main'
     ports:
       - '3000:3000'
 
@@ -18,8 +16,8 @@ services:
       context: ./nginx
       dockerfile: Dockerfile
       cache_from:
-        - 'ghcr.io/vergilmariy/nginx'
-    image: 'ghcr.io/vergilmariy/nginx'
+        - 'ghcr.io/vergilmariy/nginx:main'
+    image: 'ghcr.io/vergilmariy/nginx:main'
     ports:
       - '80:80'
       - '443:443'
