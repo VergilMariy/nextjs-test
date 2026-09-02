@@ -3,7 +3,7 @@ name: CICD Prod
 on: 
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [develop]
 env:
   NEXT_APP_WEBSITE_IMAGE: ghcr.io/vergilmariy/website:$GITHUB_HEAD_REF
   NEXT_APP_NGINX_IMAGE: ghcr.io/vergilmariy/nginx:$GITHUB_HEAD_REF
