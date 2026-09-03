@@ -5,8 +5,8 @@ services:
       context: .
       dockerfile: Dockerfile
       cache_from:
-        - 'ghcr.io/vergilmariy/website:main'
-    image: 'ghcr.io/vergilmariy/website:main'
+        - ${NEXT_APP_WEBSITE_IMAGE}
+    image: ${NEXT_APP_WEBSITE_IMAGE}
     ports:
       - '3000:3000'
 
