@@ -35,14 +35,21 @@ jobs:
       - name: Push images
         run: |
           docker compose -f docker-compose.ci.yml push
-      - name: Prune versions
+      - name: Prune website versions
         uses: actions/delete-package-versions@v5
         with:
           package-name: 'website'
           package-type: 'container'
           delete-only-untagged-versions: 'true'
           min-versions-to-keep: 5
-            
+      - name: Prune nginx versions
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name: 'nginx'
+          package-type: 'container'
+          delete-only-untagged-versions: 'true'
+          min-versions-to-keep: 5
+
   deploy:
     name: Deploy AWS
     runs-on: ubuntu-latest

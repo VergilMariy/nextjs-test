@@ -5,8 +5,8 @@ on:
   push:
     branches: [main]
 env:
-  NEXT_APP_WEBSITE_IMAGE: ghcr.io/vergilmariy/website:main
-  NEXT_APP_NGINX_IMAGE: ghcr.io/vergilmariy/nginx:main
+  NEXT_APP_WEBSITE_IMAGE: ghcr.io/vergilmariy/website:${{ github.ref_name }}
+  NEXT_APP_NGINX_IMAGE: ghcr.io/vergilmariy/nginx:${{ github.ref_name }}
   REGISTRY: ghcr.io
 jobs:
   build:
@@ -39,6 +39,13 @@ jobs:
         uses: actions/delete-package-versions@v5
         with:
           package-name: 'website'
+          package-type: 'container'
+          delete-only-untagged-versions: 'true'
+          min-versions-to-keep: 5
+      - name: Prune nginx versions
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name: 'nginx'
           package-type: 'container'
           delete-only-untagged-versions: 'true'
           min-versions-to-keep: 5
