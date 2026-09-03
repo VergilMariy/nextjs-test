@@ -5,8 +5,8 @@ on:
   push:
     branches: [develop]
 env:
-  NEXT_APP_WEBSITE_IMAGE: ghcr.io/vergilmariy/website:$GITHUB_BASE_REF
-  NEXT_APP_NGINX_IMAGE: ghcr.io/vergilmariy/nginx:$GITHUB_BASE_REF
+  NEXT_APP_WEBSITE_IMAGE: ghcr.io/vergilmariy/website:${{ github.ref_name }}
+  NEXT_APP_NGINX_IMAGE: ghcr.io/vergilmariy/nginx:${{ github.ref_name }}
   REGISTRY: ghcr.io
 jobs:
   build:
