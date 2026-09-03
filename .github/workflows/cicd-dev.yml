@@ -1,9 +1,9 @@
-name: CICD main
+name: CICD dev
 
 on: 
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [develop]
 env:
   NEXT_APP_WEBSITE_IMAGE: ghcr.io/vergilmariy/website:${{ github.ref_name }}
   NEXT_APP_NGINX_IMAGE: ghcr.io/vergilmariy/nginx:${{ github.ref_name }}
@@ -35,7 +35,7 @@ jobs:
       - name: Push images
         run: |
           docker compose -f docker-compose.ci.yml push
-      - name: Prune versions
+      - name: Prune website versions
         uses: actions/delete-package-versions@v5
         with:
           package-name: 'website'
@@ -49,7 +49,7 @@ jobs:
           package-type: 'container'
           delete-only-untagged-versions: 'true'
           min-versions-to-keep: 5
-            
+
   deploy:
     name: Deploy AWS
     runs-on: ubuntu-latest
